@@ -1,7 +1,9 @@
+import { StyledFormField } from "./style";
+
 export default function FormField({ children }) {
   return (
-    <div>
+    <StyledFormField>
       {children}
-    </div>
+    </StyledFormField>
   );
 }
