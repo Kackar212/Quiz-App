@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         <Route path="/dodaj-quiz">Dodaj quiz</Route>
         <Route>404</Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
