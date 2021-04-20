@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useQuery } from "react-query"
 import { fetchQuizzes } from "../api";
 import QuizPreview from "../components/QuizPreview";
