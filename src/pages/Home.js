@@ -3,8 +3,8 @@ import { fetchQuizzes } from "../api";
 import QuizPreview from "../components/QuizPreview";
 
 export default function Home() {
-  const { data: quizzes, isLoading, isError } = useQuery('quizzes', fetchQuizzes);
-
+  const { data: quizzes = [] } = useQuery('quizzes', fetchQuizzes);
+  
   return (
     <div>
       { 
