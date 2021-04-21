@@ -5,7 +5,7 @@ export default function QuizPreview({ name, tags = [], id, user }) {
   return (
     <div>
       <div>
-        <Link to={`/quiz/${id}`}>{ name }</Link>
+        <Link to={`/quiz/${id}/${name}`}>{ name }</Link>
       </div>
       <div>
         <Tags tags={tags} />
