@@ -5,3 +5,11 @@ export async function fetchQuizzes() {
   
   return response.json();
 }
+
+export async function fetchQuiz({ queryKey }) {
+  const [_, quizId] = queryKey;
+
+  const response = await fetch(`${baseURL}/quizzes/${quizId}`);
+
+  return response.json();
+}
