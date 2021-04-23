@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
-import Quiz from "./components/Quiz";
+import Quiz from "./pages/Quiz";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 
