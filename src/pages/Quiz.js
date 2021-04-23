@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
-import Questions from "../Questions";
-import Tags from "../Tags";
+import Questions from "../components/Questions";
+import Tags from "../components/Tags";
 
 export default function Quiz() {
     return (
