@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "react-query"
+import { useQuery } from "react-query"
 import { fetchQuizzes } from "../api";
 import Loader from "../components/Loader";
 import QuizPreview from "../components/QuizPreview";
