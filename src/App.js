@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation";
 import Quiz from "./pages/Quiz";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import AddQuiz from "./pages/AddQuiz";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         <Route path="/profil">
           <Profile />
         </Route>
-        <Route path="/dodaj-quiz">Dodaj quiz</Route>
+        <Route path="/dodaj-quiz">
+          <AddQuiz />
+        </Route>
         <Route>404</Route>
       </Switch>
       <Footer />
