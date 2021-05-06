@@ -26,3 +26,6 @@ export function getFromPath(path, obj, defaultValue = "") {
     }, obj || {});
 }
 
+export function hasErrors(...arrays) {
+  return !!arrays.flat(Infinity).length; 
+}
