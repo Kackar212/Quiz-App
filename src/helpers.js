@@ -29,3 +29,7 @@ export function getFromPath(path, obj, defaultValue = "") {
 export function hasErrors(...arrays) {
   return !!arrays.flat(Infinity).length; 
 }
+
+export function isEmpty(arr) {
+  return !arr.length;
+}
