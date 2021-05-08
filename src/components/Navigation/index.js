@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
+import { NavigationLink, NavigationList } from "./styles";
 
 export default function Navigation() {
   return (
     <nav>
-      <ul>
+      <NavigationList>
         <li>
-          <Link to="/">Strona główna</Link>
+          <NavigationLink to="/">Strona główna</NavigationLink>
         </li>
         <li>
-          <Link to="/profil">Twój profil</Link>
+          <NavigationLink to="/profil">Twój profil</NavigationLink>
         </li>
         <li>
-          <Link to="/dodaj-quiz">Dodaj quiz</Link>
+          <NavigationLink to="/dodaj-quiz">Dodaj quiz</NavigationLink>
         </li>
-      </ul>
+      </NavigationList>
     </nav>
   )
 }
