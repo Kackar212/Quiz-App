@@ -5,6 +5,7 @@ export const StyledInput = styled.input`
     box-shadow: ${({ border }) => border || "0 0 0 1px rgb(0 0 0 / 20%)"};
     padding: 10px 8px;
     width: 100%;
+    border-radius: 0;
     ${({ type }) => (
         (type === "checkbox" || type === "radio") && `
                 box-shadow: none;
