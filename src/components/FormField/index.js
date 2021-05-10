@@ -1,10 +1,19 @@
-import { StyledFormField } from "./style";
+import { Errors, InputContainer, StyledFormField } from "./style";
 
-export default function FormField({ children }) {
+export default function FormField({ children, errors = [], ...props }) {
   return (
-    <StyledFormField>
-      {children}
-      <div role="alert"></div>
+    <StyledFormField {...props}>
+      <InputContainer>
+        {children}
+      </InputContainer>
+      <Errors
+        role="alert"
+        padding={!!errors.length}
+      >
+        {errors.map((error) => 
+          <span key={error}>{error}</span>
+        )}
+      </Errors>
     </StyledFormField>
   );
 }
