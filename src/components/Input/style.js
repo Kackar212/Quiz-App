@@ -14,6 +14,13 @@ export const StyledInput = styled.input`
 
                 & + label {
                     color: #222;
+                    display: flex;
+                    align-items: center;
+                    text-transform: uppercase;
+                }
+
+                &:checked + label span::after {
+                    display: block;
                 }
         `)
     }
