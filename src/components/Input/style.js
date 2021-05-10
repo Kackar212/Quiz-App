@@ -17,6 +17,8 @@ export const StyledInput = styled.input`
                     display: flex;
                     align-items: center;
                     text-transform: uppercase;
+                    font-size: .725em;
+                    padding-left: 8px;
                 }
 
                 &:checked + label span::after {
