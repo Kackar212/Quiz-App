@@ -15,7 +15,7 @@ export const StyledCustomCheckbox = styled.span`
     &::after {
         content: '';
         background: url(${checkMark});
-        display: block;
+        display: none;
         background-size: contain;
         background-position: center;
         width: 18px;
