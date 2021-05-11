@@ -5,6 +5,11 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
+    *:focus {
+        box-shadow: 0 0 0 2px #000;
+        outline: none;
+    }
+
     body {
         font-family: 'Open Sans', sans-serif;
     }
