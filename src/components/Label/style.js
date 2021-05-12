@@ -7,4 +7,7 @@ export const StyledLabel = styled.label`
     left: 8px;
     color: ${({ color = "#a09797" }) => color};
     display: flex;
+    cursor: ${({ position }) => position === "static" ? 'pointer' : 'text'};
+    background-color: #fff;
+    padding: 0 4px;
 `;
