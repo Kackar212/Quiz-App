@@ -1,7 +1,10 @@
-export default function Button({ children, ...props }) {
+import { SrOnly, StyledButton } from "./style";
+
+export default function Button({ children, srOnly, ...props }) {
     return (
-        <button {...props}>
-            {children}
-        </button>
+        <StyledButton hasIcon={!!srOnly} {...props}>
+            { !!srOnly && <SrOnly>{ srOnly }</SrOnly> }
+            { children }
+        </StyledButton>
     );
 }
