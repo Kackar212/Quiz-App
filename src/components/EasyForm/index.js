@@ -22,7 +22,7 @@ export default function EasyForm({
       onSubmit({ ev, errors, isValid  })
     }
 
-    function input(name, inputType) {
+    function input(name) {
       const value = getFromPath(name, values);
       const checked = getFromPath(name, values, false);
       
@@ -32,11 +32,11 @@ export default function EasyForm({
         value,
         checked,
         id: name,
-        type: inputType
+        isNotEmpty: value !== "",
       };
 
       return props;
     }
 
-    return render({ setValues, values, input, onSubmit: onSubmitListener, errors, isValid });
+    return render({ setValues, values, input, onSubmit: onSubmitListener, errors,  isValid });
 }
