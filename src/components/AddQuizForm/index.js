@@ -8,6 +8,7 @@ import Form from "../Form";
 import FormField from "../FormField";
 import Input from "../Input";
 import Label from "../Label";
+import { QuestionContainer } from "./style";
 
 const schema = validateSchema
   .add(['title', 'question', 'answers', 'correctAnswer'], {
@@ -18,7 +19,12 @@ const schema = validateSchema
   })
   .add(['question', 'title', 'answers'], {
     maxLength: 80,
+    minLength: 3,
   });
+
+const onHover = {
+  background: '#52d250',
+}
 
 export default function AddQuizForm() {
   const [questionId, setQuestionId] = useState(1);
@@ -37,16 +43,16 @@ export default function AddQuizForm() {
         <Form>
           <FormField errors={title}>
             <Input {...input('title')} type="text" />
-            <Label>Podaj tytuł</Label>
+            <Label htmlFor="title">Podaj tytuł</Label>
           </FormField>
           <FormField errors={tags}>
             <Input {...input('tags')} type="text" />
-            <Label>Podaj tagi(oddzieli je |, przykład: tag1|tag2)</Label>
+            <Label htmlFor="tags">Podaj tagi odzielonne za pomocą |</Label>
           </FormField>
-          <div>
+          <QuestionContainer>
             <FormField errors={question}>
               <Input {...input('question')} type="text" />
-              <Label>Pytanie</Label>
+              <Label htmlFor="question">Pytanie</Label>
             </FormField>
             <AddQuizFormAnswers 
               questionId={questionId} 
@@ -54,9 +60,13 @@ export default function AddQuizForm() {
               input={input}
               setValues={setValues}
             />
-          </div>
-          <Button type="button" disabled={hasErrors(question, answers, correctAnswer)}>Zapisz pytanie</Button>
-          <Button type="submit" disabled={!isValid}>Zapisz quiz</Button>
+          </QuestionContainer>
+          <Button
+            type="button"
+            full
+            disabled={hasErrors(question, answers, correctAnswer)}
+          >Zapisz pytanie</Button>
+          <Button type="submit" full disabled={!isValid}>Zapisz quiz</Button>
         </Form>
       }
     />
