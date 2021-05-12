@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const StyledFormField = styled.div`
     display: flex;
-    margin: 15px auto;
+    margin: 15px 0;
     flex-direction: column;
-    width: 95%;
-    max-width: 400px;
+    width: 100%;
     padding: 8px 0;
 `;
 
