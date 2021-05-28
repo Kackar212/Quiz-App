@@ -13,3 +13,15 @@ export async function fetchQuiz({ queryKey }) {
 
   return response.json();
 }
+
+export async function createQuiz(quiz) {
+  const response = await fetch(`${baseURL}/quizzes`, {
+    method: "post",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(quiz),
+  })
+
+  return response.json();
+}
