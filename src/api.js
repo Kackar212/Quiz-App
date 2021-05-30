@@ -1,27 +1,40 @@
 const baseURL = 'http://localhost:8080/api';
 
-export async function fetchQuizzes() {
-  const response = await fetch(`${baseURL}/quizzes`);
-  
+async function post(url, options) {
+  const { body } = options;
+
+  options = {
+    ...options,
+    body: typeof body === 'string' ? body : JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+  }
+
+  return request(`${baseURL}/${url}`, options);
+}
+
+async function get(url, options) {
+  return request(`${baseURL}/${url}`, options);
+}
+
+async function request(url, options) {
+  const response = await fetch(url, options);
+
   return response.json();
+}
+
+export async function fetchQuizzes() {
+  return get('quizzes');
 }
 
 export async function fetchQuiz({ queryKey }) {
   const [_, quizId] = queryKey;
 
-  const response = await fetch(`${baseURL}/quizzes/${quizId}`);
-
-  return response.json();
+  return get(`${baseURL}/quizzes/${quizId}`);
 }
 
 export async function createQuiz(quiz) {
-  const response = await fetch(`${baseURL}/quizzes`, {
-    method: "post",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(quiz),
-  })
-
-  return response.json();
+  return post(`${baseURL}/quizzes`, { body: quiz });
 }

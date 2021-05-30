@@ -79,39 +79,42 @@ export default class Validator {
   maxLength(value, max) {
     return value.length <= max;
   }
+
+  isEmail(value) {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+))*$/.test(value);
+  }
 }
 
 
 const validator = new Validator(errorsMessages);
 export const validateSchema = {
-  schema: {},
-  validator,
   create() {
-    return {
-      add: this.add,
+    const instance = {
       schema: {},
       validator,
       create: this.create,
-    };
-  },
-  add(names, rules) {
-    names.forEach(name => {
-      if (!this.schema[name]) {
-        this.schema[name] = {};
+      add(names, rules) {
+          names.forEach(name => {
+            if (!this.schema[name]) {
+              this.schema[name] = {};
+            }
+            
+            Object
+              .entries(rules)
+              .map(([method, args]) => {
+                if (args === undefined) args = [];
+                if (!Array.isArray(args)) args = [args];
+    
+                this.schema[name][method] = args;
+              });
+          });
+    
+          return this;
       }
-      
-      Object
-        .entries(rules)
-        .map(([method, args]) => {
-          if (args === undefined) args = [];
-          if (!Array.isArray(args)) args = [args];
+    }
 
-          this.schema[name][method] = args;
-        });
-    });
-
-    return this;
-  }
+    return instance;
+  },
 }
 
 export function useValidate(values, schema, validator) {
