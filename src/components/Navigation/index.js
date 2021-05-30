@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { NavigationLink, NavigationList } from "./styles";
 
 export default function Navigation() {
