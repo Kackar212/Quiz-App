@@ -38,3 +38,7 @@ export async function fetchQuiz({ queryKey }) {
 export async function createQuiz(quiz) {
   return post('quizzes', { body: quiz });
 }
+
+export async function createUser(user) {
+  return post('users', { body: user });
+}
