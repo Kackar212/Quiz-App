@@ -32,9 +32,9 @@ export async function fetchQuizzes() {
 export async function fetchQuiz({ queryKey }) {
   const [_, quizId] = queryKey;
 
-  return get(`${baseURL}/quizzes/${quizId}`);
+  return get(`quizzes/${quizId}`);
 }
 
 export async function createQuiz(quiz) {
-  return post(`${baseURL}/quizzes`, { body: quiz });
+  return post('quizzes', { body: quiz });
 }
