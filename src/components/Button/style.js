@@ -22,13 +22,18 @@ export const StyledButton = styled.button`
     font-weight: 600;    
     justify-content: center;
     border-radius: 0;
-
+    align-items: center;
+    position: relative;
 
     & svg {
         transition: fill 0.3s;
     }
 
-    width: ${({ full }) => !!full && "100%"};
+    width: ${({ hasIcon }) => hasIcon ? 'auto' : '100%'};
+
+    @media screen and (min-width: 546px) {
+        width: ${({ full }) => full ? '100%' : 'auto'};
+    }
 
     &:not([disabled]):hover {
         background: ${({ full }) => full ? '#52d250' : '#a54545'};
