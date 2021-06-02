@@ -1,7 +1,8 @@
-import { Svg } from "./style";
+import { LoaderContainer, Svg } from "./style";
 
 export default function Loader({ scale }) {
     return (
+      <LoaderContainer>
         <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" scale={scale}>
           <path data-name="layer2" d="M32 62a30 30 0 0 0 26.6-16.2C50 42 49.2 50.6 46 50s-4.2-3.3-6-.4-4.7 3-7.9 2.4-3.4.7-6.3 2-7.1-1.2-5.8-6-4.7-5.1-6-2-2.2 5.6-4 5.9h-.4A29.9 29.9 0 0 0 32 62z" fill="#de9d63"></path>
           <path data-name="layer1" d="M32 2A30 30 0 0 0 9.6 52h.4c1.9-.3 2.8-2.8 4-5.9s7.2-2.6 6 2 2.9 7.3 5.8 6 3.1-2.6 6.3-2 6.1.5 7.9-2.4 2.8-.2 6 .4 4-8 12.6-4.2A30 30 0 0 0 32 2zm0 40a10 10 0 1 1 10-10 10 10 0 0 1-10 10z" fill="#f5a4c4"></path>
@@ -38,5 +39,6 @@ export default function Loader({ scale }) {
             strokeWidth="2"
           ></path>
         </Svg>    
+        </LoaderContainer>
     );
 }
