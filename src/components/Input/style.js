@@ -25,9 +25,10 @@ const styleForCheckbox = css`
 `
 
 const labelOnFocus = css`
-    transform: translateY(-100%);
+    transform: translateY(-65%);
     top: 1px;
     transition: transform .3s;
+    font-size: .875em;
 `
 
 export const StyledInput = styled.input`
