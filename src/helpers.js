@@ -1,3 +1,5 @@
+import { authPost, refreshToken } from "./api";
+
 export function getKeys(path) {
     return path.replace(/\[(\d*)\]/g, ".$1").split(".");
 }
@@ -59,4 +61,22 @@ export function removeCookie(cookieName) {
   document.cookie = `${cookieName}=${JSON.stringify(cookie)}; max-age=-1;`;
 
   return !!getCookie(cookieName);
+}
+
+export async function isAuth() {
+  const cookie = getCookie('user');
+
+  if (!cookie) {
+    const response = await refreshToken();
+    
+    return response.statusCode !== 401;
+  }
+
+  return !!cookie;
+}
+
+export async function logout(setAuth) {
+  setAuth(false);
+  removeCookie('user');
+  return authPost('auth/logout');
 }
