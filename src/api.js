@@ -69,6 +69,10 @@ export async function fetchQuiz({ queryKey }) {
   return get(`quizzes/${quizId}`);
 }
 
+export async function refreshToken() {
+  return await post('auth/refresh');
+}
+
 export async function createQuiz(quiz) {
   return authPost('quizzes', quiz);
 }
