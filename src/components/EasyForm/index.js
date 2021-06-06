@@ -12,9 +12,9 @@ export default function EasyForm({
     const [values, setValues] = useState(initialValues);
     const { isValid, errors } = useValidate(values, schema, validator);
 
-    function onSubmitListener(ev) {
+    async function onSubmitListener(ev) {
       ev.preventDefault();
-      onSubmit({ ev, errors, isValid, values: mapValues(values) });
+      onSubmit({ ev, errors, isValid, values: mapValues(values), setValues });
     }
 
     function input(name, onChange = () => {}) {
@@ -42,5 +42,5 @@ export default function EasyForm({
       return props;
     }
 
-    return render({ setValues, values, mappedValues: mapValues(values), input, onSubmit: onSubmitListener, errors,  isValid, mapValues });
+    return render({ setValues, values, initialValues, mappedValues: mapValues(values), input, onSubmit: onSubmitListener, errors,  isValid, mapValues });
 }
