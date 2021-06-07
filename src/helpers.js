@@ -1,13 +1,13 @@
 import { authPost, refreshToken } from "./api";
 
 export function getKeys(path) {
-    return path.replace(/\[(\d*)\]/g, ":array.$1").split(".");
+    return path.replace(/\[(\d*)\]/g, ":array.$1").split(".").map((key) => key.split(":"));
 }
 
 export function put(path = "", obj, value) {
     const keys = getKeys(path);
     let currObj = obj || {};
-    keys.forEach((key, index) => {
+    keys.forEach(([key], index) => {
       if (index === keys.length - 1) {
         if (typeof value === 'function') {
           value(currObj[key]);
@@ -23,18 +23,17 @@ export function put(path = "", obj, value) {
 } 
 
 export function getFromPath(path, obj, defaultValue = "") {
-
     const keys = getKeys(path);
 
-    return keys.reduce((prev, curr) => {
-      if (typeof prev[curr] === "undefined") return defaultValue;
-      return (prev = prev[curr]);
+    return keys.reduce((prev, [key]) => {
+      if (typeof prev[key] === "undefined") return defaultValue;
+      return (prev = prev[key]);
     }, obj || {});
 }
 
 export function createFromPath(path, value, obj = {}) {
   let currObj = obj;
-  const keys = getKeys(path).map((key) => key.split(":"));
+  const keys = getKeys(path);
   keys.forEach((key, index) => {
     const [keyName, type] = key;
    
