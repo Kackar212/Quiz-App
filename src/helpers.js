@@ -1,7 +1,7 @@
 import { authPost, refreshToken } from "./api";
 
 export function getKeys(path) {
-    return path.replace(/\[(\d*)\]/g, ".$1").split(".");
+    return path.replace(/\[(\d*)\]/g, ":array.$1").split(".");
 }
 
 export function put(path = "", obj, value) {
