@@ -9,7 +9,11 @@ export function put(path = "", obj, value) {
     let currObj = obj || {};
     keys.forEach((key, index) => {
       if (index === keys.length - 1) {
-        currObj[key] = value;
+        if (typeof value === 'function') {
+          value(currObj[key]);
+        } else {
+          currObj[key] = value;
+        }
       }
 
       currObj = currObj[key];
