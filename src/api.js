@@ -28,7 +28,6 @@ async function get(url) {
 }
 
 async function request(url, options) {
-  console.log(options);
   const response = await fetch(url, options);
 
   return response.json();
