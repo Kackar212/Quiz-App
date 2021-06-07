@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createFromPath, getFromPath, put } from '../helpers';
 import errorsMessages from './errors';
 
 export default class Validator {
@@ -35,8 +36,9 @@ export default class Validator {
 
     const errors = {};
     Object.entries(schema).forEach(([name, rules]) => {
-      errors[name] = [];
-      const vals = values[name];
+      // errors[name] = [];
+      createFromPath(name, [], errors);
+      const vals = getFromPath(name, values);
       const isRequired = (rules.required || [])[0];
       const onlyFirstValid = (rules.one || [])[0];
 
@@ -44,18 +46,18 @@ export default class Validator {
           this.isValid = true; 
           if (Array.isArray(vals)) {
             if (!vals.length) {
-              return errors[name].push(this.validateOnce(rules));
+              return put(name, errors, (obj) => obj.push(this.validateOnce(rules)));
             }
 
             for (const val of vals) {
-              errors[name].push(this.validateOnce(rules, val));
+              put(name, errors, obj => obj.push(this.validateOnce(rules, val)));
               if (this.isValid && onlyFirstValid) {
-                errors[name] = [];
+                put(name, errors, []);
                 break;
               }
             }
           } else {
-            errors[name].push(...this.validateOnce(rules, vals));
+            put(name, errors, (obj) => obj.push(...this.validateOnce(rules, vals)));
           }
       }
     });
