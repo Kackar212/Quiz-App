@@ -4,8 +4,7 @@ export function getKeys(path) {
     return path.replace(/\[(\d*)\]/g, ".$1").split(".");
 }
 
-export function put(path = "", obj, value, newObj = false) {
-    
+export function put(path = "", obj, value) {
     const keys = getKeys(path);
     let currObj = obj || {};
     keys.forEach((key, index) => {
@@ -27,6 +26,27 @@ export function getFromPath(path, obj, defaultValue = "") {
       if (typeof prev[curr] === "undefined") return defaultValue;
       return (prev = prev[curr]);
     }, obj || {});
+}
+
+export function createFromPath(path, value, obj = {}) {
+  let currObj = obj;
+  const keys = getKeys(path).map((key) => key.split(":"));
+  keys.forEach((key, index) => {
+    const [keyName, type] = key;
+   
+    if (index < keys.length - 1) {
+      if (!currObj[keyName]) {
+        currObj[keyName] = type ? [] : {};
+      }
+      currObj = currObj[keyName];
+    }
+
+    if (index === keys.length - 1) {
+      currObj[keyName] = value;
+    }
+  });
+
+  return obj;
 }
 
 export function hasErrors(...arrays) {
