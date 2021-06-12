@@ -27,9 +27,6 @@ export const Svg = styled.svg`
         width: ${scale * 38}px;
         height: ${scale * 38}px;
     `}
-
-    height: 30px;
-    width: 30px;
     
     @media screen and (min-width: 546px) {
         right: -40px;
