@@ -24,7 +24,11 @@ async function post(url, body) {
 }
 
 async function get(url) {
-  return request(`${baseURL}/${url}`);
+  return request(`${baseURL}/${url}`, defaultOptions);
+}
+
+async function deleteRequest(url) {
+  return request(`${baseURL}/${url}`, { ...defaultOptions, method: 'delete' });
 }
 
 async function request(url, options) {
@@ -40,7 +44,6 @@ async function authRequest(url, method = get, body) {
     const response = await refreshToken();
 
     if (response.statusCode === 401) {
-      
       return response;
     }
 
@@ -82,4 +85,8 @@ export async function createUser(user) {
 
 export async function authUser(user) {
   return post('users/auth', user);
+}
+
+export async function deleteQuiz(id) {
+  return deleteRequest(`quizzes/${id}`);
 }
