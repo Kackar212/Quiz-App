@@ -10,7 +10,7 @@ export function put(path = "", obj, value) {
     keys.forEach(([key], index) => {
       if (index === keys.length - 1) {
         if (typeof value === 'function') {
-          value(currObj[key]);
+          value(currObj[key], currObj, key);
         } else {
           currObj[key] = value;
         }
@@ -80,8 +80,8 @@ export function getCookie(cookieName) {
 }
 
 export function removeCookie(cookieName) {
-  const cookie = getCookie(cookieName);
-  document.cookie = `${cookieName}=${JSON.stringify(cookie)}; max-age=-1;`;
+  // const cookie = getCookie(cookieName);
+  document.cookie = `${cookieName}=; Max-Age=-1; path=/;`;
 
   return !!getCookie(cookieName);
 }
@@ -91,7 +91,7 @@ export async function isAuth() {
 
   if (!cookie) {
     const response = await refreshToken();
-    
+
     return response.statusCode !== 401;
   }
 
@@ -99,7 +99,8 @@ export async function isAuth() {
 }
 
 export async function logout(setAuth) {
-  setAuth(false);
+  await authPost('auth/logout');
   removeCookie('user');
-  return authPost('auth/logout');
+  localStorage.setItem('auth', false);
+  setAuth(false);
 }
