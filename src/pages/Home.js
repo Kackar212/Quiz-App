@@ -15,14 +15,10 @@ export default function Home() {
       return <Message to="/dodaj-quiz" link="Dodaj quiz" message="Nie ma jeszcze żadnych quizów :("/>
     }
 
-    return quizzes.map(({ id, user, name }) => (
-      <QuizPreview id={id} user={user} name={name} key={id}/>
+    return quizzes.map(({ id, user, name, categories, questions }) => (
+      <QuizPreview id={id} user={user} numOfQuestions={questions.length} name={name} key={id} tags={categories}/>
     ))
   }
 
-  return (
-    <div>
-      { renderQuizzes() }
-    </div>
-  )
+  return renderQuizzes();
 }
