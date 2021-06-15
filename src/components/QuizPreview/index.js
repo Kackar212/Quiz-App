@@ -1,18 +1,33 @@
-import { Link } from "react-router-dom";
 import Tags from "../Tags";
+import Button from "../Button";
+import { ReactComponent as TrashIcon } from "../../assets/trash-can.svg";
+import { MetaDataContainer, QuizTitle, AuthorLink, QuizPreviewContainer, NumberOfQuestions } from "./style";
 
-export default function QuizPreview({ name, tags = [], id, user }) {
+export default function QuizPreview({ name, tags = [], id, user, getUserQuizzes, numOfQuestions, removeQuiz, isLoading, removedId }) {
+  if (removedId === id) return null;
   return (
-    <div>
+    <QuizPreviewContainer>
       <div>
-        <Link to={`/quiz/${id}/${name}`}>{ name }</Link>
+        <QuizTitle to={`/quiz/${id}/${name}`}>{ name }</QuizTitle>
+        <NumberOfQuestions>{numOfQuestions}</NumberOfQuestions>
       </div>
-      <div>
+      <MetaDataContainer>
         <Tags tags={tags} />
-        <div>
-          Autor: <Link to={`/uzytkownicy/${user.name}`}>{ user.name }</Link>
-        </div>
-      </div>
-    </div>
+        <AuthorLink to={`/uzytkownicy/${user.name}`}>{ user.name }</AuthorLink>
+        {removeQuiz && (
+          <Button 
+            type="button"
+            onClick={async () => {
+              await removeQuiz(id);
+              getUserQuizzes();
+            }} 
+            srOnly="Usuń"
+            isLoading={isLoading}
+          >
+            <TrashIcon />
+          </Button>
+        )}
+      </MetaDataContainer>
+    </QuizPreviewContainer>
   );
 }

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { authGet, authUser, createUser, deleteQuiz } from "../api";
 import AuthForm from "../components/AuthForm";
 import QuizPreview from "../components/QuizPreview";
 import { UserContext } from "../context/User";
 import Loader from "../components/Loader";
-import { isEmpty } from "../helpers";
+import { createCookie, isEmpty } from "../helpers";
 import Message from "../components/Message";
 
 export default function Profile() {
@@ -31,6 +32,7 @@ export default function Profile() {
           apiFunction={authUser}
           afterRequest={({ name, id } = {}) => {
             setUser({ name, id });
+            createCookie('user', { name, id }, { 'max-age': 1200, path: '/' });
             setAuth(true);
             localStorage.setItem('auth', true);
             history.goBack();
@@ -43,7 +45,7 @@ export default function Profile() {
   let quizzes = Array.isArray(data) ? data : [];
   quizzes = quizzes.filter(({ id }) => deletedQuizData.id !== id);
 
-  const renderQuizPreview = ({ id, user, name, categories, questions }) => (
+  const renderQuizPreview = ({ id, user, name, categories, questions }) => (<>
     <QuizPreview
       id={id}
       tags={categories}
@@ -56,7 +58,8 @@ export default function Profile() {
       isLoading={removeQuizIsLoading}
       getUserQuizzes={refetch}
     />
-  );
+    <Link style={{ display: 'block', textAlign: 'center' }} to={`/results/${id}`}>Zobacz rozwiązania twojego quizu przez innych użytkowników</Link>
+  </>);
 
   if (isEmpty(quizzes)) {
     return <Message to="/dodaj-quiz" link="Dodaj quiz" message="Nie masz jeszcze żadnych quizów :("/>

@@ -13,6 +13,7 @@ const styleForCheckbox = css`
         font-size: .725em;
         padding-left: 8px;
         position: static;
+        padding: 5px;
     }
 
     & + label span::after {

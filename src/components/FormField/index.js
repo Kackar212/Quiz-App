@@ -1,8 +1,8 @@
 import { Errors, InputContainer, StyledFormField } from "./style";
 
-export default function FormField({ children, errors = [], ...props }) {
+export default function FormField({ children, errors = [], isCorrectAnswer, ...props }) {
   return (
-    <StyledFormField {...props}>
+    <StyledFormField {...props} isCorrectAnswer={isCorrectAnswer}>
       <InputContainer>
         {children}
       </InputContainer>

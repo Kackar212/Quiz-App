@@ -17,9 +17,9 @@ export const LoaderContainer = styled.div`
     justify-content: center;
     align-items: center;
     position: absolute;
-    left: 50%;
+    left: ${({ position }) => position === 'right' ? '100%' : '50%'};
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: ${({ position }) => position === 'right' ? 'translateY(-50%)' : 'translate(-50%, -50%)'};
 `;
 
 export const Svg = styled.svg`

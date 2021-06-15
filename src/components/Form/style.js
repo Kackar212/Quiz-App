@@ -5,3 +5,8 @@ export const StyledForm = styled.form`
     max-width: 400px;
     margin: 0 auto;
 `;
+
+export const Message = styled.div`
+    color: ${({ isSuccess }) => isSuccess ? '#52d250' : 'red'};
+    margin-top: 50px;
+`;

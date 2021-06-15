@@ -60,13 +60,13 @@ export function isEmpty(arr = []) {
   return !arr.length;
 }
 
-export function createCookie(cookieName, value, options) {
+export function createCookie(cookieName, value, options = {}) {
   const { onExpire, ...rest } = options;
 
-  setTimeout(onExpire, (rest['max-age'] + 10) * 1000);
+  onExpire && setTimeout(onExpire, (rest['max-age'] + 10) * 1000);
   
   const parsedOptions = Object.entries(rest).map(([k, v]) => `${k}=${v};`).join(' ');
-  document.cookie = `${cookieName}=${value}; ${parsedOptions}`;
+  document.cookie = `${cookieName}=${JSON.stringify(value)}; ${parsedOptions}`;
 }
 
 export function getCookie(cookieName) {
@@ -80,22 +80,31 @@ export function getCookie(cookieName) {
 }
 
 export function removeCookie(cookieName) {
-  // const cookie = getCookie(cookieName);
-  document.cookie = `${cookieName}=; Max-Age=-1; path=/;`;
+  const [_, path] = document.baseURI.split('/');
+
+  document.cookie = `${cookieName}=; Max-Age=-1; path=/${path};`;
 
   return !!getCookie(cookieName);
 }
 
-export async function isAuth() {
+export async function isAuth(setUser) {
   const cookie = getCookie('user');
 
   if (!cookie) {
     const response = await refreshToken();
+    const isLoggedIn = response.statusCode !== 401;
 
-    return response.statusCode !== 401;
+    if (isLoggedIn) {
+      createCookie('user', response, { 'max-age': 1200, path: '/' })
+      setUser(response);
+    }
+
+    return isLoggedIn;
   }
 
-  return !!cookie;
+  setUser(cookie);
+
+  return true;
 }
 
 export async function logout(setAuth) {

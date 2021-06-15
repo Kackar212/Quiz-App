@@ -6,6 +6,7 @@ export const StyledFormField = styled.div`
     flex-direction: column;
     width: 100%;
     padding: 8px 0;
+    ${({ isCorrectAnswer }) => isCorrectAnswer === true && 'background: green'};
 `;
 
 export const InputContainer = styled.div`

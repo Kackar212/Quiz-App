@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
 import { isAuth } from "./helpers";
 
-export const useAuth = () => {
+export const useAuth = (initialValue = false) => {
     const [user, setUser] = useState({});
-    const [auth, setAuth] = useState(false);
-    
+    const [auth, setAuth] = useState(initialValue);
+
     const userAuth = async () => {
-        if (auth !== await isAuth()) {
-            setAuth(!auth);
+      const isUserAuth = await isAuth(setUser);
+      localStorage.setItem('auth', isUserAuth);
+      if (!isUserAuth) setUser({});
+
+      setAuth((prevAuth) => {
+        if (prevAuth !== isUserAuth) {
+          return !prevAuth;
         }
+
+        return prevAuth;
+      });
     }
 
     useEffect(() => {
       userAuth();
-      setInterval(() => {
-        userAuth();
-      }, 2000);
+      setInterval(async () => {
+        await userAuth();
+      }, 5000);
     }, []);
   
     return { user, setUser, auth, setAuth };

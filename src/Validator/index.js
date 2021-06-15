@@ -36,7 +36,6 @@ export default class Validator {
 
     const errors = {};
     Object.entries(schema).forEach(([name, rules]) => {
-      // errors[name] = [];
       createFromPath(name, [], errors);
       const vals = getFromPath(name, values);
       const isRequired = (rules.required || [])[0];
@@ -61,7 +60,6 @@ export default class Validator {
           }
       }
     });
-
     return [errors, this.isAllValid];
   }
 
@@ -119,8 +117,8 @@ export const validateSchema = {
   },
 }
 
-export function useValidate(values, schema, validator) {
-  const [[ errors, isValid ], setResult] = useState(validator.validate(values, schema));
+export function useValidate(values, initialValues, schema, validator) {
+  const [[ errors, isValid ], setResult] = useState(validator.validate(initialValues, schema));
 
   useEffect(() => {
     setResult(validator.validate(values, schema));

@@ -10,4 +10,9 @@ export const StyledLabel = styled.label`
     cursor: ${({ position }) => position === "static" ? 'pointer' : 'text'};
     background-color: #fff;
     padding: 0 4px;
+    /* &:checked {
+        color: ${({ isCorrectAnswer }) => isCorrectAnswer !== undefined && '#fff'};
+        background-color: ${({ isCorrectAnswer }) => isCorrectAnswer ? 'green' : isCorrectAnswer === false && 'red'};
+        padding: ${({ isCorrectAnswer }) => isCorrectAnswer !== undefined && '5px'} 4px;
+    } */
 `;
